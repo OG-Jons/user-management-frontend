@@ -25,7 +25,7 @@ export default Vue.extend({
           await this.$router.go(0);
         })
         .catch((err) => {
-          if (err.response.statusCode === 401) {
+          if (err.response.code === 401) {
             this.showErrorAlert = {
               show: true,
               value: err.response.message,

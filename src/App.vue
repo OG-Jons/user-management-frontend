@@ -1,15 +1,17 @@
 <template>
   <div id="app">
     <div id="nav">
-      <div v-if="isLoggedIn && isAdmin">
-        <router-link to="/">Dashboard</router-link> |
-        <router-link to="/cat">Kategorien</router-link> |
+      <div v-if="isLoggedIn">
         <router-link to="/user">Benutzer</router-link>
       </div>
       <router-link v-if="!isLoggedIn" to="/auth">Login / SignUp</router-link>
       <br />
     </div>
-    <router-view />
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -52,5 +54,16 @@ export default Vue.extend({
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+/* route transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

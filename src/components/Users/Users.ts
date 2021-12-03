@@ -22,9 +22,10 @@ export default Vue.extend({
       this.users = await APIService.getUsers();
     },
     async deleteUser(id: number) {
+      console.log("delete");
       await APIService.deleteUser(id);
-      const deletedUser = this.users.filter((user) => user.id === id)[0];
-      if (deletedUser.id === id) {
+      const deletedUser = this.users.find((user) => user.id === id);
+      if (deletedUser && deletedUser.id === id) {
         await this.signOut();
       }
       this.users = this.users.filter((user) => user.id !== id);

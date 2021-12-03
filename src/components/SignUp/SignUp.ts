@@ -33,11 +33,10 @@ export default Vue.extend({
       await APIService.signUp(this.newUser)
         .then(() => this.signIn())
         .catch((err) => {
-          console.log("err: ", err);
-          if (err.response.statusCode === 409) {
+          if (err.response.status === 409) {
             this.showErrorAlert = {
               show: true,
-              value: err.response.message,
+              value: err.response.data.message,
             };
           }
         });
@@ -48,7 +47,7 @@ export default Vue.extend({
         username: this.newUser.username,
         password: this.newUser.password,
       });
-      await this.$store.commit("setToken", loginResponse.headers.authorization);
+      await this.$store.commit("setToken", loginResponse.data.accessToken);
       await this.$router.push("/");
       await this.$router.go(0);
     },
