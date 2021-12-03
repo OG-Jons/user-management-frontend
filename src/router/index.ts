@@ -1,8 +1,9 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import AuthInput from "../views/AuthInput.vue";
+import AuthInput from "@/views/AuthInput.vue";
 import VueCookies from "vue-cookies";
 import UserManagement from "@/views/UserManagement.vue";
+import UserEdit from "@/views/UserEdit.vue";
 
 Vue.use(VueRouter);
 Vue.use(VueCookies);
@@ -17,6 +18,11 @@ const routes: Array<RouteConfig> = [
     path: "/auth",
     name: "Auth",
     component: AuthInput,
+  },
+  {
+    path: "/edit/:id",
+    name: "User Edit",
+    component: UserEdit,
   },
 ];
 

@@ -9,10 +9,10 @@ export default Vue.extend({
       users: [] as User[],
       fields: [
         { key: "username", label: "Username" },
-        { key: "firstName", label: "Vorname" },
-        { key: "lastName", label: "Nachname" },
+        { key: "firstName", label: "First Name" },
+        { key: "lastName", label: "Last Name" },
         { key: "email", label: "E-Mail" },
-        { key: "id", label: "Speichern/Löschen" },
+        { key: "id", label: "Management" },
       ],
     };
   },
@@ -21,11 +21,14 @@ export default Vue.extend({
       this.users = [] as User[];
       this.users = await APIService.getUsers();
     },
+    async goToEdit(id: number): Promise<void> {
+      await this.$router.push(`/edit/${id}`);
+    },
     async deleteUser(id: number) {
       console.log("delete");
       await APIService.deleteUser(id);
       const deletedUser = this.users.find((user) => user.id === id);
-      if (deletedUser && deletedUser.id === id) {
+      if (deletedUser && deletedUser.username === this.$store.state.username) {
         await this.signOut();
       }
       this.users = this.users.filter((user) => user.id !== id);

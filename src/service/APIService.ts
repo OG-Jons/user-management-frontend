@@ -33,7 +33,7 @@ export default {
   },
 
   async updateUser(id: number, user: User): Promise<AxiosResponse> {
-    return await axios.put(`${BASE_URL}/user/${id}`, user, getConfig());
+    return await axios.patch(`${BASE_URL}/user/${id}`, user, getConfig());
   },
 
   async deleteUser(id: number): Promise<void> {

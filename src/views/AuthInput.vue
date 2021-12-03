@@ -10,8 +10,8 @@
               align="center"
               active-nav-item-class="active"
             >
-              <b-tab title="Anmelden" active><Login /></b-tab>
-              <b-tab title="Registrieren"><SignUp /></b-tab>
+              <b-tab title="Sign In" active><Login /></b-tab>
+              <b-tab title="Sign Up"><SignUp /></b-tab>
             </b-tabs>
           </div>
         </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Benutzer Verwaltung</h3>
+    <h3>User management</h3>
     <div class="container">
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -21,11 +21,18 @@
               <template #cell(id)="data">
                 <b-button-group>
                   <b-button
-                    title="Löschen"
+                    title="Edit"
+                    variant="primary"
+                    @click="goToEdit(data.value)"
+                  >
+                    <b-icon icon="pen" aria-label="Edit"></b-icon>
+                  </b-button>
+                  <b-button
+                    title="Delete"
                     variant="danger"
                     @click="deleteUser(data.value)"
                   >
-                    <b-icon icon="trash" aria-label="Löschen"></b-icon>
+                    <b-icon icon="trash" aria-label="Delete"></b-icon>
                   </b-button>
                 </b-button-group>
               </template>

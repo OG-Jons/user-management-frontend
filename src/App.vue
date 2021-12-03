@@ -2,9 +2,9 @@
   <div id="app">
     <div id="nav">
       <div v-if="isLoggedIn">
-        <router-link to="/user">Benutzer</router-link>
+        <router-link to="/user">User</router-link>
       </div>
-      <router-link v-if="!isLoggedIn" to="/auth">Login / SignUp</router-link>
+      <router-link v-if="!isLoggedIn" to="/auth">Sign In / Sign Up</router-link>
       <br />
     </div>
     <router-view v-slot="{ Component }">

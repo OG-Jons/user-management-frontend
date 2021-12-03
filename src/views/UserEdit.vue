@@ -1,20 +1,20 @@
 <template>
   <div>
     <SignOut />
-    <Categories />
+    <EditUser />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import Categories from "@/components/Categories/Categories.vue";
 import SignOut from "@/components/SignOut/SignOut.vue";
+import EditUser from "@/components/UserEdit/EditUser.vue";
 
 export default Vue.extend({
-  name: "CategoryManagment",
+  name: "UserManagement",
   components: {
-    Categories,
     SignOut,
+    EditUser,
   },
 });
 </script>
