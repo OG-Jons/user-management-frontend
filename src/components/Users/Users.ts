@@ -1,6 +1,8 @@
 import Vue from "vue";
 import { User } from "@/model/user/user.model";
 import APIService from "@/service/APIService";
+import NewUser from "@/components/NewUser/NewUser.vue";
+import { UserSignUp } from "@/model/user/userSignUp.model";
 
 export default Vue.extend({
   name: "Users",
@@ -16,8 +18,11 @@ export default Vue.extend({
       ],
     };
   },
+  components: {
+    NewUser,
+  },
   methods: {
-    async loadUsers() {
+    async loadUsers(): Promise<void> {
       this.users = [] as User[];
       this.users = await APIService.getUsers();
     },
@@ -25,7 +30,6 @@ export default Vue.extend({
       await this.$router.push(`/edit/${id}`);
     },
     async deleteUser(id: number) {
-      console.log("delete");
       await APIService.deleteUser(id);
       const deletedUser = this.users.find((user) => user.id === id);
       if (deletedUser && deletedUser.username === this.$store.state.username) {
@@ -36,6 +40,11 @@ export default Vue.extend({
     async signOut() {
       await this.$store.commit("setToken", null);
       await this.$router.push("/auth");
+    },
+
+    async updateUserTable(): Promise<void> {
+      await this.loadUsers();
+      this.$bvModal.hide("new-user-modal");
     },
   },
   async created() {

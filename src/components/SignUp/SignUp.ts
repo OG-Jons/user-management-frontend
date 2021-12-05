@@ -6,13 +6,7 @@ export default Vue.extend({
   name: "SignUp",
   data() {
     return {
-      newUser: {
-        username: "",
-        password: "",
-        email: "",
-        firstName: "",
-        lastName: "",
-      } as UserSignUp,
+      newUser: {} as UserSignUp,
       confirmPassword: "",
       errors: [] as { show: boolean; value: string }[],
     };
@@ -47,7 +41,10 @@ export default Vue.extend({
         !!this.newUser.password &&
         !!this.newUser.email &&
         !!this.newUser.firstName &&
-        !!this.newUser.lastName
+        !!this.newUser.lastName &&
+        /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(
+          this.newUser.password
+        )
       ) {
         return true;
       }
@@ -56,6 +53,17 @@ export default Vue.extend({
         this.errors.push({
           show: true,
           value: "Username is required",
+        });
+      }
+
+      if (
+        !/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(
+          this.newUser.password
+        )
+      ) {
+        this.errors.push({
+          show: true,
+          value: "Password is not strong enough",
         });
       }
 
@@ -90,7 +98,6 @@ export default Vue.extend({
       return false;
     },
     async signIn() {
-      console.log("login");
       const loginResponse = await APIService.signIn({
         username: this.newUser.username,
         password: this.newUser.password,

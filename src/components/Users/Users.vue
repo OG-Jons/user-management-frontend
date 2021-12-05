@@ -3,6 +3,11 @@
     <h3>User management</h3>
     <div class="container">
       <div class="row">
+        <div class="col-sm-12">
+          <b-button variant="primary" v-b-modal.new-user-modal>
+            New User
+          </b-button>
+        </div>
         <div class="col-sm-12 col-md-12 col-lg-12">
           <div class="card border-0 shadow rounded-3 my-5">
             <b-table striped hover :items="users" :fields="fields" responsive>
@@ -41,6 +46,14 @@
         </div>
       </div>
     </div>
+    <b-modal
+      ref="new-user-modal"
+      id="new-user-modal"
+      title="Create new user"
+      hide-footer
+    >
+      <NewUser @created="updateUserTable" />
+    </b-modal>
   </div>
 </template>
 <script lang="ts" src="./Users.ts"></script>

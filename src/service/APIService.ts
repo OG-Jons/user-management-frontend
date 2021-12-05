@@ -16,6 +16,7 @@ export default {
   async signUp(user: UserSignUp): Promise<AxiosResponse> {
     return await axios.post(`${BASE_URL}/auth/signup`, user);
   },
+
   async signIn(user: UserLogin): Promise<AxiosResponse> {
     return await axios.post(`${BASE_URL}/auth/sign-in`, user);
   },

@@ -4,7 +4,6 @@ import VueCookies from "vue-cookies";
 import jwtDecode from "jwt-decode";
 
 Vue.use(Vuex);
-
 Vue.use(VueCookies);
 
 export default new Vuex.Store({
