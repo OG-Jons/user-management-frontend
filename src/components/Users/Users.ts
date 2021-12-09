@@ -2,7 +2,6 @@ import Vue from "vue";
 import { User } from "@/model/user/user.model";
 import APIService from "@/service/APIService";
 import NewUser from "@/components/NewUser/NewUser.vue";
-import { UserSignUp } from "@/model/user/userSignUp.model";
 
 export default Vue.extend({
   name: "Users",
@@ -16,6 +15,7 @@ export default Vue.extend({
         { key: "email", label: "E-Mail" },
         { key: "id", label: "Management" },
       ],
+      userToDelete: null as number | null,
     };
   },
   components: {
@@ -29,13 +29,18 @@ export default Vue.extend({
     async goToEdit(id: number): Promise<void> {
       await this.$router.push(`/edit/${id}`);
     },
-    async deleteUser(id: number) {
+    setUserToBeDeleted(id: number): void {
+      this.userToDelete = id;
+    },
+    async deleteUser() {
+      const id = this.userToDelete as number;
       await APIService.deleteUser(id);
       const deletedUser = this.users.find((user) => user.id === id);
       if (deletedUser && deletedUser.username === this.$store.state.username) {
         await this.signOut();
       }
       this.users = this.users.filter((user) => user.id !== id);
+      this.userToDelete = null;
     },
     async signOut() {
       await this.$store.commit("setToken", null);

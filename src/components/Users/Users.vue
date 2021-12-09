@@ -35,7 +35,8 @@
                   <b-button
                     title="Delete"
                     variant="danger"
-                    @click="deleteUser(data.value)"
+                    @click="setUserToBeDeleted(data.value)"
+                    v-b-modal.delete-user-confirmation
                   >
                     <b-icon icon="trash" aria-label="Delete"></b-icon>
                   </b-button>
@@ -46,6 +47,14 @@
         </div>
       </div>
     </div>
+    <b-modal
+      ref="delete-user-confirmation"
+      id="delete-user-confirmation"
+      title="Delete user"
+      @ok="deleteUser"
+    >
+      <h6>Are you sure you want to delete this user?</h6>
+    </b-modal>
     <b-modal
       ref="new-user-modal"
       id="new-user-modal"

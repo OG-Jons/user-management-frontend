@@ -15,6 +15,7 @@
                 {{ error.value }}
               </b-alert>
             </div>
+            <b-button class="mb-3" @click="cancelEdit"> Cancel </b-button>
             <form @submit.prevent="updateUser">
               <div class="form-floating mb-3">
                 <input
@@ -58,12 +59,7 @@
                 <label for="register_lastName">Last name</label>
               </div>
               <div class="d-grid">
-                <button
-                  class="btn btn-primary btn-login text-uppercase fw-bold"
-                  type="submit"
-                >
-                  Update
-                </button>
+                <button class="btn btn-primary" type="submit">Update</button>
               </div>
             </form>
           </div>

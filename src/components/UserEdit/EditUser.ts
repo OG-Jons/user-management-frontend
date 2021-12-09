@@ -21,6 +21,10 @@ export default Vue.extend({
       }
     },
 
+    async cancelEdit(): Promise<void> {
+      await this.$router.push("/");
+    },
+
     validateInput(): boolean {
       if (
         !!this.user.username &&
